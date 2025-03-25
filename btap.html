@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<form action=" " method="GET">
+    Họ và tên: <input type="text" name="ho_ten" size="15" maxlength="30" placeholder="Nhập vào họ tên" />
+</form>
+<form action="" method="GET">
+    Mật khẩu: <input type="text" name="mat_khau" size="50" maxlength="30" placeholder="Nhập vào mật khẩu" />
+</form>
+<p>Giới thiệu bản thân</p>
+<form action="" method="GET">
+    <textarea name="gioi_thieu" cols="20" rows="4" placeholder="Bạn hãy giới thiệu qua về bản thân mình"></textarea>
+</form>
+Chọn đáp án đúng:
+<input type="radio" name="ket_qua" value="a" checked="checked" /> Đáp án A 
+<input type="radio" name="ket_qua" value="b" /> Đáp án B
+<input type="radio" name="ket_qua" value="c" /> Đáp án C 
+<form>
+Sở thích của bạn:
+<input type="checkbox" name="so_thich" value="Nghe nhạc" checked="checked" /> Nghe nhạc
+<input type="checkbox" name="so_thich" value="XEm phim" /> Xem phim 
+</form>
+<form> 
+Chọn nơi bạn đang sinh sống:
+<select name="thanh_pho">
+    <option value="">--Chọn thành phố--</option>
+    <option value="hanoi" selected>Hà Nội</option>
+    <option value="hochiminh" selected>Hồ Chí Minh</option>
+</select>
+</form>
+<form>
+    chọn nơi bạn từng sinh sống<br>
+    <select name="thanh_pho" sze="4" multiple="multiple">
+        <option value="hanoi" selected="selected"> Hà Nội</option>
+        <option value="hochiminh" selected="selected"> Hồ Chí Minh</option>
+        <option value="dalat" selected="selected"> Đà Lạt</option>
+        <option value="sapa" selected="selected"> Sa Pa</option>
+    </select>
+</form>
+<form>
+    File đính kèm 
+    <input type="file" name="avatar" accept="image/*"/> <br/>
+</form>
+<form>
+    <p>Nhận bài viết mới nhất</p>
+    <input type="text" name="email" />
+    <input type="submit" name="dangky" value="Đăng ký" />
+</form>
+<form> 
+file đính kèm:   
+    <input type="file" name="avatar" accept="image/*"/>" <br/>
+</form>
+<form>
+    <input type="text" name="name" required pattern="[A-Za-z\s]+"/> <br/>  
+</form>
+<form>
+    <input type="date" name="date_of_birth" id="date_of_birth"/> <br/>
+</form>
+<input type="email" name="email" id="email" placeholder="Email"/> <br/>
