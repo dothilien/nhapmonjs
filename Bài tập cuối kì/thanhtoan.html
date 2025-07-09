@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Thanh Toán</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .checkout-container {
+      max-width: 1000px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .checkout-title {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .checkout-product {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+    .checkout-product img {
+      width: 100px;
+      border-radius: 6px;
+    }
+    .checkout-product-info {
+      flex: 1;
+    }
+    .checkout-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .checkout-form input, textarea {
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .checkout-form button {
+      background-color: #f7981c;
+      color: white;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .cart-total {
+      text-align: right;
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="checkout-container">
+    <div class="checkout-title">Xác Nhận Đơn Hàng</div>
+    <div id="product-info"></div>
+
+    <h3>Thông tin khách hàng</h3>
+    <form class="checkout-form" onsubmit="submitOrder(event)">
+      <input type="text" placeholder="Họ và tên" required>
+      <input type="tel" placeholder="Số điện thoại" required>
+      <input type="text" placeholder="Địa chỉ giao hàng" required>
+      <textarea rows="3" placeholder="Ghi chú (nếu có)"></textarea>
+      <button type="submit">Xác nhận thanh toán</button>
+    </form>
+  </div>
+
+  <script>
+    const productInfo = document.getElementById('product-info');
+    let total = 0;
+
+    const checkoutList = JSON.parse(localStorage.getItem('checkoutList'));
+
+    if (Array.isArray(checkoutList) && checkoutList.length > 0) {
+      // nhiều sản phẩm từ giỏ hàng
+      checkoutList.forEach(item => {
+        const itemTotal = item.quantity * parseInt(item.price.replace(/[^\d]/g, ''));
+        total += itemTotal;
+
+        const div = document.createElement('div');
+        div.className = 'checkout-product';
+        div.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <div class="checkout-product-info">
+            <div><strong>${item.name}</strong></div>
+            <div>Số lượng: ${item.quantity}</div>
+            <div>Giá: ${item.price}</div>
+          </div>
+        `;
+        productInfo.appendChild(div);
+      });
+    } else {
+      // fallback: nếu là 1 sản phẩm từ "mua ngay"
+      const singleProduct = JSON.parse(localStorage.getItem('checkout'));
+      if (singleProduct) {
+        const itemTotal = singleProduct.quantity * parseInt(singleProduct.price.replace(/[^\d]/g, ''));
+        total += itemTotal;
+
+        const div = document.createElement('div');
+        div.className = 'checkout-product';
+        div.innerHTML = `
+          <img src="${singleProduct.image}" alt="${singleProduct.name}">
+          <div class="checkout-product-info">
+            <div><strong>${singleProduct.name}</strong></div>
+            <div>Số lượng: ${singleProduct.quantity}</div>
+            <div>Giá: ${singleProduct.price}</div>
+          </div>
+        `;
+        productInfo.appendChild(div);
+      } else {
+        productInfo.innerHTML = '<p style="text-align:center; color:#888;">Không có sản phẩm nào để thanh toán.</p>';
+      }
+    }
+
+    // Hiển thị tổng tiền
+    if (total > 0) {
+      const totalEl = document.createElement('div');
+      totalEl.className = 'cart-total';
+      totalEl.textContent = 'Tổng cộng: ' + total.toLocaleString('vi-VN') + 'đ';
+      productInfo.appendChild(totalEl);
+    }
+
+    function submitOrder(event) {
+      event.preventDefault();
+      alert("Đơn hàng của bạn đã được gửi! Cảm ơn bạn đã mua sắm tại VN CLO.");
+      localStorage.removeItem('checkout');
+      localStorage.removeItem('checkoutList');
+      localStorage.removeItem('cart');
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

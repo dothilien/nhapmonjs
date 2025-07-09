@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VN CLO</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="index.html">VN CLO</a>
+    </div>
+    <nav class="nav">
+      <a href="maumoive.html">MẪU MỚI VỀ</a>
+      <a href="tatcasp.html">TẤT CẢ SẢN PHẨM</a>
+      <a href="giamgia.html">⚡ GIẢM GIÁ 60% 🎁</a>
+    </nav>
+    <div class="icons">
+      <i class="fas fa-search"></i>
+      <i class="fas fa-user"></i>
+       <a href="cart.html" style="position: relative;">
+  <i class="fas fa-shopping-cart"><span>0</span></i>
+</a>
+    </div>
+  </header>
+  <div class="container">
+    <div class="left-content">
+      <div>SALE SỐC 60%</div>
+      <img src="https://cdn-img.upanhlaylink.com/img/image_20250522689b8768b79c4258b957036eca746a85.jpg" alt="HOT DEALS">
+    </div>
+  </div>
+
+  <div class="product-list">
+    <div class="product-card">
+      <div class="image-container">
+        <img src="https://cdn-img.upanhlaylink.com/img/image_20250523c4722307e84c8d21ced010f8953cd996.jpg" alt="áo xanh">
+        <div class="overlay-icons">
+          <span class="icon">🛒</span>
+          <span class="icon">👁️</span>
+        </div>
+        <span class="sale-badge">Sale</span>
+      </div>
+      <a href="#" class="product-name">ÁO THUN KIỂU NỮ THUN GÂN - AT205</a>
+      <div class="price">
+        <span class="new-price">83,400đ</span>
+        <span class="old-price"><s>139,000đ</s></span>
+        <span class="discount">-60%</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="image-container">
+        <img src="https://cdn-img.upanhlaylink.com/img/image_202505236a7bc5fa8cf7be77d7af42c709b12925.jpg" alt="áo trắng">
+        <div class="overlay-icons">
+          <span class="icon">🛒</span>
+          <span class="icon">👁️</span>
+        </div>
+        <span class="sale-badge">Sale</span>
+      </div>
+      <a href="#" class="product-name">ÁO THUN KIỂU NỮ IN HÌNH - AT204</a>
+      <div class="price">
+        <span class="new-price">119,400đ</span>
+        <span class="old-price"><s>199,000đ</s></span>
+        <span class="discount">-60%</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="image-container">
+        <img src="https://cd
+n-img.upanhlaylink.com/img/image_202505235bab3b9dcb1a3881fd32fa541ddd8ec0.jpg" alt="áo gấu">
+        <div class="overlay-icons">
+          <span class="icon">🛒</span>
+          <span class="icon">👁️</span>
+        </div>
+        <span class="sale-badge">Sale</span>
+      </div>
+      <a href="#" class="product-name">ÁO THUN KIỂU NỮ IN HÌNH GẤU - AT203</a>
+      <div class="price">
+        <span class="new-price">129,600đ</span>
+        <span class="old-price"><s>216,000đ</s></span>
+        <span class="discount">-60%</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="image-container">
+        <img src="https://cdn-img.upanhlaylink.com/img/image_202505238c717a4596927e6df0afe231bc3a8215.jpg" alt="áo đen">
+        <div class="overlay-icons">
+          <span class="icon">🛒</span>
+          <span class="icon">👁️</span>
+        </div>
+        <span class="sale-badge">Sale</span>
+      </div>
+      <a href="#" class="product-name">ÁO THUN KIỂU NỮ THÊU HÌNH TIM - AT202</a>
+      <div class="price">
+        <span class="new-price">119,400đ</span>
+        <span class="old-price"><s>199,000đ</s></span>
+        <span class="discount">-60%</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="image-container">
+        <img src="https://cdn-img.upanhlaylink.com/img/image_20250523d5497c6913f7cce7ce63228e7a8ada23.jpg" alt="áo cam">
+        <div class="overlay-icons">
+          <span class="icon">🛒</span>
+          <span class="icon">👁️</span>
+        </div>
+        <span class="sale-badge">Sale</span>
+      </div>
+      <a href="#" class="product-name">ÁO THUN IN NHIỀU HÌNH - AT201</a>
+      <div class="price">
+        <span class="new-price">90,000đ</span>
+        <span class="old-price"><s>150,000đ</s></span>
+        <span class="discount">-60%</span>
+      </div>
+    </div>
+  </div>
+  <div class="view-all-container">
+    <button class="view-all-btn">Xem tất cả ></button>
+  </div>
+
+ <script>  
+    // Lấy tất cả các thẻ có class 'product-card'
+    const productCards = document.querySelectorAll('.product-card');
+
+    productCards.forEach(function(card) {
+      card.addEventListener('click', function () {
+        // this chính là thẻ .product-card đang được click
+        const image = this.querySelector('.image-container img').src;
+        const productName = this.querySelector('.product-name').textContent;
+        const newPrice = this.querySelector('.new-price').textContent;
+
+        const productData = {
+          image: image,
+          name: productName,
+          price: newPrice
+        };
+
+        // Lưu thông tin vào localStorage, ghi đè nếu đã có
+        localStorage.setItem('selectedProduct', JSON.stringify(productData));
+        
+        window.location.href = 'sanpham.html'
+
+        });
+
+    });
+  </script>
+
+ <script>
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const cartIcons = document.querySelectorAll('.fa-shopping-cart span');
+    cartIcons.forEach(span => span.textContent = count);
+  }
+
+  updateCartCount();
+</script>
+
+</body>
+</html>
