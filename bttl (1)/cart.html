@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Giỏ Hàng</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .cart-container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .cart-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+      padding: 10px 0;
+    }
+    .cart-item img {
+      width: 80px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .cart-details {
+      flex: 2;
+      padding: 0 20px;
+    }
+    .cart-name {
+      font-weight: bold;
+    }
+    .cart-qty {
+      margin-top: 5px;
+    }
+    .cart-price {
+      color: red;
+      font-weight: bold;
+    }
+    .remove-btn {
+      background-color: #ff4d4f;
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .cart-total {
+      text-align: right;
+      font-size: 18px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    .checkout-button {
+      float: right;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #f7981c;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .empty-cart {
+      text-align: center;
+      font-size: 18px;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo">
+      <a href="index.html">VN CLO</a>
+    </div>
+    <nav class="nav">
+      <a href="maumoive.html">MẪU MỚI VỀ</a>
+      <a href="tatcasp.html">TẤT CẢ SẢN PHẨM</a>
+      <a href="giamgia.html">⚡ GIẢM GIÁ 60% 🎁</a>
+    </nav>
+    <div class="icons">
+      <i class="fas fa-search"></i>
+      <i class="fas fa-user"></i>
+      <a href="cart.html" style="position: relative;">
+        <i class="fas fa-shopping-cart"><span>0</span></i>
+      </a>
+    </div>
+  </header>
+
+  <div class="cart-container">
+    <h2 class="cart-title">🛒 Giỏ Hàng Của Bạn</h2>
+    <div id="cart-items"></div>
+    <div class="cart-total" id="cart-total">Tổng cộng: 0đ</div>
+    <button id="checkout-btn" class="checkout-button">Thanh toán</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+  <script>
+    function loadCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartContainer = document.getElementById('cart-items');
+      const totalElement = document.getElementById('cart-total');
+      cartContainer.innerHTML = '';
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = '<p class="empty-cart">Giỏ hàng của bạn đang trống.</p>';
+        totalElement.textContent = 'Tổng cộng: 0đ';
+        return;
+      }
+
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        const itemTotal = item.quantity * parseInt(item.price.replace(/[^\d]/g, ''));
+        total += itemTotal;
+
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+        cartItem.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <div class="cart-details">
+            <div class="cart-name">${item.name}</div>
+            <div class="cart-qty">Số lượng: ${item.quantity}</div>
+          </div>
+          <div class="cart-price">${item.price}</div>
+          <button class="remove-btn" onclick="removeItem(${index})">Xóa</button>
+        `;
+        cartContainer.appendChild(cartItem);
+      });
+
+      totalElement.textContent = 'Tổng cộng: ' + total.toLocaleString('vi-VN') + 'đ';
+      updateCartCount();
+    }
+
+    function removeItem(index) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      loadCart();
+    }
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.querySelectorAll('.fa-shopping-cart span').forEach(span => span.textContent = count);
+    }
+
+    // Thanh toán
+    document.getElementById('checkout-btn').addEventListener('click', () => {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      if (cart.length === 0) {
+        alert("Giỏ hàng trống. Không thể thanh toán.");
+        return;
+      }
+
+      localStorage.setItem('checkoutList', JSON.stringify(cart));
+      window.location.href = 'thanhtoan.html';
+    });
+
+    window.onload = loadCart;
+  </script>
+</body>
+</html>
